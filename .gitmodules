@@ -1,0 +1,3 @@
+[submodule "anemic-components"]
+	path = anemic-components
+	url = https://github.com/haroldcampbell/anemic-components
