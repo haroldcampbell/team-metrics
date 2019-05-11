@@ -1,0 +1,28 @@
+body {
+  font-family: "Open Sans";
+  font-size: 1em;
+  color: #444;
+  height: 100%;
+}
+
+ul, li {
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  color: #444;
+}
+
+a:visited {
+  color: #444;
+}
+
+
+svg {
+  border: solid 1px #efefe3;
+}

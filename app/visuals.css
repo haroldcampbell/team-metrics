@@ -1,0 +1,107 @@
+#sprint-metrics svg {
+  width: 400px;
+}
+
+#sprint-summary-metrics svg {
+  width: 400px;
+}
+
+#estimate-metrics svg {
+  width: 600px;
+}
+
+.container svg {
+  fill: rgb(255, 255, 255);
+  min-height: 250px;
+}
+
+.ex-tiny svg {
+  height: 120px;
+}
+
+.ex-short svg {
+  height: 200px;
+}
+
+.container svg .path,
+.container svg .arc {
+  stroke: rgba(255, 0, 110, 0.5);
+  fill: none;
+}
+
+/* #c6-e3>.path:nth-last-child(3n) {
+  stroke: rgba(0, 120, 255, 0.5);
+}
+
+#c6-e3>.path:nth-child(3n) {
+  stroke: rgba(128, 128, 128, 0.5);
+} */
+
+#border {
+  fill: rgb(255, 255, 255);
+  stroke-width: 1;
+  stroke: #ccc;
+}
+
+.bar,
+.ellipse {
+  /* fill: rgba(0, 120, 255, 0.5); */
+  fill: rgba(138, 189, 253, 0.8);
+}
+
+.line {
+  /* stroke: rgba(138, 189, 253, 0.8); */
+  stroke: #666;
+  stroke-width: 2px;
+  stroke-linecap:round;
+}
+
+.text {
+  fill: #404040;
+}
+
+.label {
+  fill: #eee;
+}
+
+svg:hover .label {
+  fill: #404040;
+}
+
+.title {
+  fill: #404040;
+  font-size: 16px;
+}
+
+.bar {
+  fill: rgb(138, 189, 253, 0.80);
+}
+
+.bar-cycle-time {
+  fill: rgb(255, 110, 110);
+}
+
+#c6-e2 :nth-child(2) {
+  fill: rgba(255, 0, 110, 0.75);
+}
+
+#c6-e2 :nth-child(3) {
+  fill: rgba(128, 128, 128, 0.75);
+}
+
+.red {
+  fill: red;
+  fill-opacity: 0.5;
+}
+.blue {
+  fill:blue;
+  fill-opacity: 0.5;
+}
+.green {
+  fill:green;
+  fill-opacity: 0.5;
+}
+.yellow {
+  fill:yellowgreen;
+  fill-opacity: 0.5;
+}
