@@ -9,17 +9,33 @@
 </head>
 
 <body>
-    <div id="sprint-metrics"></div>
-    <div id="sprint-summary-metrics">
+    <section class="rootContainer">
+        <section class="data-summary">
+            Add User Stories Here
+        </section>
+        <section class="quant">
+            <section class="widget-container">
+                <div id="sprint-metrics" class="widget"></div>
+                <div id="team-summary-metrics" class="widget"></div>
+                <div id="sprint-summary" class="widget"></div>
+                <div id="sprint-cycletime-summary" class="widget"></div>
+            </section>
 
-    </div>
-    <div id="estimate-metrics"></div>
+            <section id="sprint-estimate-details" class="widget-container estimate-details">
+            </section>
+
+            <section id="estimate-metrics" class="widget-container">
+                <!-- <div id="estimate-metrics"></div> -->
+            </section>
+        </section>
+    </section>
     <script src="./dist/metrics.js" type="text/javascript"></script>
     <script src="./src/inline-common.js" type="text/javascript"></script>
     <script src="./src/inline-app.js" type="text/javascript"></script>
     <script src="./src/inline-process-data.js" type="text/javascript"></script>
-    <script src="./src/inline-sprint.js" type="text/javascript"></script>
-    <script src="./src/inline-sprint-summary.js" type="text/javascript"></script>
+    <script src="./src/inline-team-velocity.js" type="text/javascript"></script>
+    <script src="./src/inline-team-summary.js" type="text/javascript"></script>
+    <script src="./src/inline-sprint-metrics.js" type="text/javascript"></script>
     <script src="./src/inline-estimates.js" type="text/javascript"></script>
 </body>
 

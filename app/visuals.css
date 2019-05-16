@@ -1,41 +1,58 @@
-#sprint-metrics svg {
+.rootContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.data-summary {
   width: 400px;
+  background-color: RGB(20, 22, 26);
 }
 
-#sprint-summary-metrics svg {
-  width: 400px;
+.quant {
+  padding: 20px;
+  border-left: solid 1px rgba(255, 255, 255, 0.1);
+  box-shadow: 0px 0px 5px #111;
 }
 
-#estimate-metrics svg {
-  width: 600px;
-}
-
-.container svg {
-  fill: rgb(255, 255, 255);
+svg {
+  /* fill: rgb(255, 255, 255); */
   min-height: 250px;
+  min-width: 200px;
 }
 
-.ex-tiny svg {
-  height: 120px;
+.widget-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  min-height: 250px;
+  width: auto;
+  border-radius: 5px;
+  /* position: relative; */
 }
 
-.ex-short svg {
-  height: 200px;
+.widget {
+  background-color: #111;
+  overflow-x: scroll;
+  /* border: solid 1px #efefe3; */
+  width: 300px;
+  margin: 10px;
+  border-radius: 5px;
+  /* box-shadow: 5px 5px 10px #111; */
+  /* border: solid 1px #222; */
 }
 
-.container svg .path,
-.container svg .arc {
+/* #f3f4f2; */
+.estimate-details {
+  background-color: RGBA(243, 244, 242, 0.2);
+  margin: 40px 0 40px 0;
+  /* padding: 10px 0 10px 0; */
+}
+
+svg .path,
+svg .arc {
   stroke: rgba(255, 0, 110, 0.5);
   fill: none;
 }
-
-/* #c6-e3>.path:nth-last-child(3n) {
-  stroke: rgba(0, 120, 255, 0.5);
-}
-
-#c6-e3>.path:nth-child(3n) {
-  stroke: rgba(128, 128, 128, 0.5);
-} */
 
 #border {
   fill: rgb(255, 255, 255);
@@ -53,24 +70,28 @@
   /* stroke: rgba(138, 189, 253, 0.8); */
   stroke: #666;
   stroke-width: 2px;
-  stroke-linecap:round;
+  stroke-linecap: round;
 }
 
 .text {
   fill: #404040;
 }
 
+.legend,
 .label {
-  fill: #eee;
-}
-
-svg:hover .label {
-  fill: #404040;
+  /* fill: #eee; */
+  fill: #999;
 }
 
 .title {
   fill: #404040;
   font-size: 16px;
+}
+
+.axis {
+  stroke: #666;
+  stroke-width: 2px;
+  stroke-linecap: round;
 }
 
 .bar {
@@ -79,29 +100,117 @@ svg:hover .label {
 
 .bar-cycle-time {
   fill: rgb(255, 110, 110);
+  cursor: pointer;
 }
 
-#c6-e2 :nth-child(2) {
+.quant:hover .widget-container{
+  background-color: #111;
+  opacity: 0.8;
+}
+.quant:hover .widget-container .widget {
+  background-color: transparent;
+}
+
+.quant:hover .widget-container:hover{
+  background-color: #000;
+  opacity: 1;
+}
+
+.quant:hover .widget-container .title{
+  fill: #777;
+}
+
+.widget-container:hover .widget {
+  /* background-color: red; */
+  opacity: 0.5;
+}
+
+.quant:hover .label {
+  fill: #333;
+}
+
+.quant:hover svg {
+  /* opacity: 0.5; */
+}
+
+.quant>.widget-container>*:hover {
+  opacity: 1;
+}
+.quant>.widget-container>.widget:hover {
+  /* background-color: rgba(17, 17, 17, 0.5); */
+  background-image: linear-gradient(to bottom, rgba(17, 17, 17, 1), rgba(17, 17, 17, 0.2))
+}
+.quant>.widget-container:hover .labels{
+  fill: #999;
+}
+.quant>.widget-container:hover .axis{
+  stroke: #333;
+}
+.quant>.widget-container:hover .bar{
+  opacity: 0.5;
+  fill: #999;
+}
+.quant>.widget-container:hover .bar-cycle-time{
+  fill: rgb(255, 110, 110);
+}
+
+.quant>.widget-container>*:hover svg {
+  /* opacity: 1; */
+}
+
+.quant>.widget-container>*:hover svg>.axis {
+  stroke: #333;
+}
+
+.quant>.widget-container>*:hover svg>.bar {
+  opacity: 0.8;
+  fill: rgb(138, 189, 253, 0.80);
+}
+.quant>.widget-container>*:hover svg>.bar-cycle-time {
+  fill: rgb(255, 110, 110);
+}
+
+.quant>.widget-container>*:hover svg>.labels {
+  fill: #fff;
+}
+
+.quant>.widget-container>*:hover svg>.title {
+  fill: yellowgreen;
+}
+
+.quant>.widget-container>*:hover svg>.legend {
+  fill: #999;
+}
+
+/* svg:hover .label { */
+  /* fill: #404040; */
+  /* fill: #404040; */
+/* }  */
+
+/* #c6-e2 :nth-child(2) {
   fill: rgba(255, 0, 110, 0.75);
 }
 
 #c6-e2 :nth-child(3) {
   fill: rgba(128, 128, 128, 0.75);
-}
+} */
 
 .red {
   fill: red;
   fill-opacity: 0.5;
 }
+
 .blue {
-  fill:blue;
+  fill: blue;
   fill-opacity: 0.5;
 }
+
 .green {
-  fill:green;
+  fill: green;
   fill-opacity: 0.5;
 }
+
 .yellow {
-  fill:yellowgreen;
+  fill: yellowgreen;
   fill-opacity: 0.5;
 }

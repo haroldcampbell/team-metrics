@@ -1,68 +1,83 @@
 app.processData = function () {
-    let squadData = {};
+    let squadData = this.loadSprintData();
+    let aggregatedMetrics = this.processSquadAggregatedMetrics(squadData);
 
-    let cycleTimesData = this.loadSprintCycleTimeData();
-    let estimatesData = this.loadSprintEstimatesData()
-    let sprintData = this.processSprintData(cycleTimesData, estimatesData)
-
-    squadData.sprintNames = sprintData.sprintNames;
-    squadData.sprintData = sprintData.sprintData;
-
-    let aggregatedMetrics = this.processSquadAggregatedMetrics(sprintData.sprintData);
-    squadData.aggregatedMetrics = aggregatedMetrics;
-
-    let estimates = this.loadEstimateData()
-    squadData.aggregatedMetrics.estimates = estimates;
+    squadData.sprintMetrics = aggregatedMetrics.sprintMetrics;
+    squadData.averageCycleTimes = aggregatedMetrics.averageCycleTimes;
+    squadData.actualVelocity = aggregatedMetrics.actualVelocity;
+    squadData.actualThroughput = aggregatedMetrics.actualThroughput;
+    squadData.estimates = this.loadEstimateData();
 
     return squadData;
 }
 
-app.processSprintData = function (sprintCycleTimes, estimatesData) {
-    let sprintData = {};
+/** Cycle time is aggregated based on story effort estimates, independently of sprint */
+app.loadEstimateData = function () {
+    let estimates = {}
+
+    metrics.worksheet.forEach(row => {
+        if (!_u.$isTruthy(estimates[row.Estimate])) {
+            estimates[row.Estimate] = []
+        }
+        estimates[parseInt(row.Estimate)].push(parseInt(row["Cycle time (days)"]))
+    });
+
+    return estimates
+}
+
+app.loadSprintData = function() {
+    let sprints = {};
     let sprintNames = [];
 
-    Object.keys(sprintCycleTimes).forEach(sprint => {
-        sprint = parseInt(sprint);
+    metrics.worksheet.forEach(row => {
+        if (!_u.$isTruthy(sprints[row.Sprint])) {
+            sprints[row.Sprint] = {
+                name: row.Sprint,
+                items: [],
+                estimates: [],
+                cycleTimes: [],
+            };
 
-        sprintNames.push(sprint);
+            sprintNames.push(row.Sprint);
+        }
 
-        sprintData[sprint] = {
-            sprint: sprint,
-            cycleTimes: sprintCycleTimes[sprint],
-            estimates: estimatesData[sprint],
-            groupedData: groupValues(sprintCycleTimes[sprint])
+        let sprintItem = {
+            estimate: parseInt(row["Estimate"]),
+            cycleTime: parseInt(row["Cycle time (days)"]),
         };
+
+        sprints[row.Sprint].items.push(sprintItem);
+        sprints[row.Sprint].estimates.push(sprintItem.estimate);
+        sprints[row.Sprint].cycleTimes.push(sprintItem.cycleTime);
     });
 
     return {
-        sprintNames: sprintNames,
-        sprintData: sprintData,
-    }
+        sprints: sprints,
+        sprintNames: sprintNames
+    };
 }
 
 app.processSquadAggregatedMetrics = function (squadData) {
     let averageCycleTimes = [];
     let actualVelocity = [];
     let actualThroughput = [];
-    let sprintMetrics = [];
+    let sprintMetrics = {};
 
-    Object.keys(squadData).forEach(sprint => {
-        sprint = parseInt(sprint);
-
-        let capacity = calcDeliveredStoryPoints(squadData[sprint].estimates);
-        let throughput = calcThroughput(squadData[sprint].estimates);
-        let avgCycleTime = calAverageCycleTime(squadData[sprint].cycleTimes);
+    squadData.sprintNames.forEach(sprint => {
+        let capacity = calcDeliveredStoryPoints(squadData.sprints[sprint].estimates);
+        let throughput = calcThroughput(squadData.sprints[sprint].estimates);
+        let avgCycleTime = calAverageCycleTime(squadData.sprints[sprint].cycleTimes);
 
         actualVelocity.push(capacity);
         actualThroughput.push(throughput);
         averageCycleTimes.push(avgCycleTime);
 
-        sprintMetrics.push({
-            sprint: sprint,
+        sprintMetrics[sprint] = {
+            name: sprint,
             capacity: capacity,
             throughput: throughput,
             avgCycleTime: avgCycleTime,
-        });
+        };
     });
 
     return {
@@ -88,44 +103,31 @@ function calAverageCycleTime(cycleTimes) {
     return avg.toFixed(1)
 }
 
-/** Cycle time is aggregated based on story effort estimates, independently of sprint */
-app.loadEstimateData = function () {
-    let estimates = {}
 
-    metrics.worksheet.forEach(row => {
-        if (!_u.$isTruthy(estimates[row.Estimate])) {
-            estimates[row.Estimate] = []
-        }
-        estimates[parseInt(row.Estimate)].push(parseInt(row["Cycle time (days)"]))
-    });
+// /** Cycle time is aggregated based on each Sprint */
+// app.loadSprintCycleTimeData = function () {
+//     let sprintCycleTimes = {};
 
-    return estimates
-}
+//     metrics.worksheet.forEach(row => {
+//         if (!_u.$isTruthy(sprintCycleTimes[row.Sprint])) {
+//             sprintCycleTimes[row.Sprint] = [];
+//         }
+//         sprintCycleTimes[parseInt(row.Sprint)].push(parseInt(row["Cycle time (days)"]));
+//     });
 
-/** Cycle time is aggregated based on each Sprint */
-app.loadSprintCycleTimeData = function () {
-    let sprintCycleTimes = {};
+//     return sprintCycleTimes;
+// }
 
-    metrics.worksheet.forEach(row => {
-        if (!_u.$isTruthy(sprintCycleTimes[row.Sprint])) {
-            sprintCycleTimes[row.Sprint] = [];
-        }
-        sprintCycleTimes[parseInt(row.Sprint)].push(parseInt(row["Cycle time (days)"]));
-    });
+// /** Estimates is aggregated based on each Sprint */
+// app.loadSprintEstimatesData = function () {
+//     let sprintEstimates = {};
 
-    return sprintCycleTimes;
-}
+//     metrics.worksheet.forEach(row => {
+//         if (!_u.$isTruthy(sprintEstimates[row.Sprint])) {
+//             sprintEstimates[row.Sprint] = [];
+//         }
+//         sprintEstimates[parseInt(row.Sprint)].push(parseInt(row["Estimate"]));
+//     });
 
-/** Estimates is aggregated based on each Sprint */
-app.loadSprintEstimatesData = function () {
-    let sprintEstimates = {};
-
-    metrics.worksheet.forEach(row => {
-        if (!_u.$isTruthy(sprintEstimates[row.Sprint])) {
-            sprintEstimates[row.Sprint] = [];
-        }
-        sprintEstimates[parseInt(row.Sprint)].push(parseInt(row["Estimate"]));
-    });
-
-    return sprintEstimates;
-}
+//     return sprintEstimates;
+// }

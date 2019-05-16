@@ -12,7 +12,7 @@ app.boot = function () {
 
     console.log("[app.boot]", sprintData);
 
-    this.renderSprintCycleTime(sprintData);
-    this.renderSprintSummary(sprintData);
+    this.renderTeamVelocity(sprintData);
+    this.renderTeamSummary(sprintData);
     this.renderEstimatesForStories(sprintData);
 }

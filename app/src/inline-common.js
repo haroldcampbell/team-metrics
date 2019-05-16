@@ -1,3 +1,7 @@
+const TitleY = 20;
+const TitleMargin = 30;
+const Legend = 20
+// const
 function averageCycleTime(cycleTimes, occurrences) {
     let items = 0;
 
@@ -11,7 +15,7 @@ function averageCycleTime(cycleTimes, occurrences) {
 
 
 /**
- * Takes a array of values and returns an array of the number occurrence of values.
+ * Takes an array of values and returns an array of the number occurrence of values.
 
  * @function groupValues
 
@@ -80,4 +84,12 @@ function mapToDistributedArray(groupedValues, startFrom = 0) {
         }
     }
     return computed
+}
+
+function resizeHorizontalAxis(visual) {
+    const container = visual.getCurrentContainer()
+    const boundingBox = _a.containerBoundingBox(visual);
+    const axis = _a.$class(container, "axis");
+
+    axis[0].$attr("x2", boundingBox.width + boundingBox.x);
 }
