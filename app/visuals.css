@@ -14,6 +14,14 @@
   box-shadow: 0px 0px 5px #111;
 }
 
+.quant label {
+  display: inline-block;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  font-size: 1.5em;
+  color: #000;
+}
+
 svg {
   /* fill: rgb(255, 255, 255); */
   min-height: 250px;
@@ -33,19 +41,16 @@ svg {
 .widget {
   background-color: #111;
   overflow-x: scroll;
-  /* border: solid 1px #efefe3; */
   width: 300px;
   margin: 10px;
   border-radius: 5px;
-  /* box-shadow: 5px 5px 10px #111; */
-  /* border: solid 1px #222; */
 }
 
 /* #f3f4f2; */
 .estimate-details {
-  background-color: RGBA(243, 244, 242, 0.2);
+  background-color: RGBA(103, 104, 102, 0.2);
   margin: 40px 0 40px 0;
-  /* padding: 10px 0 10px 0; */
+  border-radius: 5px;
 }
 
 svg .path,
@@ -103,89 +108,102 @@ svg .arc {
   cursor: pointer;
 }
 
-.quant:hover .widget-container{
+.quant:hover .estimate-details {
+  background-color: transparent;
+  -webkit-transition: background-color 0.7s;
+  /* Safari */
+  transition: background-color 0.7s;
+}
+
+.quant:hover .widget-container {
   background-color: #111;
   opacity: 0.8;
 }
+
 .quant:hover .widget-container .widget {
   background-color: transparent;
 }
 
-.quant:hover .widget-container:hover{
+.quant:hover .widget-container:hover {
   background-color: #000;
   opacity: 1;
-  -webkit-transition: background-color 0.5s; /* Safari */
-  transition: background-color 0.5s;
 
+  -webkit-transition: background-color 0.7s;
+  transition: background-color 0.7s;
 }
 
-.quant:hover .widget-container .title{
+.quant:hover .widget-container .title {
   fill: #777;
 }
 
 .widget-container:hover .widget {
   opacity: 0.5;
-  -webkit-transition: opacity 0.5s; /* Safari */
-  transition: opacity 0.5s;
 
+  -webkit-transition: opacity 0.7s;
+  transition: opacity 0.7s;
 }
 
 .quant:hover .label {
   fill: #333;
 }
 
-.quant>.widget-container>*:hover {
+.quant .widget-container>*:hover {
   opacity: 1;
 }
-.quant>.widget-container>.widget:hover {
+
+.quant .widget-container>.widget:hover {
   background-image: linear-gradient(to bottom, rgba(17, 17, 17, 1), rgba(17, 17, 17, 0.2));
 }
 
-.quant>.widget-container:hover .labels{
+.quant .widget-container:hover .labels {
   fill: #999;
 }
-.quant>.widget-container:hover .axis{
+
+.quant .widget-container:hover .axis {
   stroke: #333;
 }
-.quant>.widget-container:hover .bar{
+
+.quant .widget-container:hover .bar {
   opacity: 0.5;
   fill: #999;
 }
-.quant>.widget-container:hover .bar-cycle-time{
+
+.quant .widget-container:hover .bar-cycle-time {
   fill: rgb(255, 110, 110);
 }
 
-.quant>.widget-container>*:hover svg {
+.quant .widget-container>*:hover svg {
   /* opacity: 1; */
 }
 
-.quant>.widget-container>*:hover svg>.axis {
+.quant .widget-container>*:hover svg>.axis {
   stroke: #333;
 }
 
-.quant>.widget-container>*:hover svg>.bar {
+.quant .widget-container>*:hover svg>.bar {
   opacity: 0.8;
   fill: rgb(138, 189, 253, 0.80);
 }
-.quant>.widget-container>*:hover svg>.bar-cycle-time {
+
+.quant .widget-container>*:hover svg>.bar-cycle-time {
   fill: rgb(255, 110, 110);
 }
 
-.quant>.widget-container>*:hover svg>.labels {
+.quant .widget-container>*:hover svg>.labels {
   fill: #fff;
 }
 
-.quant>.widget-container>*:hover svg>.title {
+.quant .widget-container>*:hover svg>.title {
   fill: yellowgreen;
 }
 
-.quant>.widget-container>*:hover svg>.legend {
+.quant .widget-container>*:hover svg>.legend {
   fill: #999;
 }
 
 /* svg:hover .label { */
-  /* fill: #404040; */
-  /* fill: #404040; */
+/* fill: #404040; */
+/* fill: #404040; */
 /* }  */
 
 /* #c6-e2 :nth-child(2) {
