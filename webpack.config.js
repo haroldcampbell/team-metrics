@@ -5,20 +5,17 @@ module.exports = {
   entry: {
     examples: [
       './anemic-components/lib/ancui.js',
-      './app/src/metrics.js',
-      // './examples/src/examples-bar.js',
-      // './examples/src/examples-ellipse.js',
-      // './examples/src/examples-advanced.js',
+      './public/js/metrics.js',
     ],
   },
 
 
   plugins: [
-    new CleanWebpackPlugin(['app/dist']),
+    new CleanWebpackPlugin(['public/dist']),
   ],
 
   output: {
-    path: path.resolve(__dirname, 'app/dist'),
+    path: path.resolve(__dirname, 'public/dist'),
     filename: 'metrics.js',
     library: 'metrics',
   }

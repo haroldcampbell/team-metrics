@@ -7,7 +7,9 @@
   "license": "Apache 2.0",
   "main": "dist/ancui.js",
   "dependencies": {
+    "busboy": "^0.3.1",
     "d3-fetch": "^1.1.2",
+    "express": "^4.16.4",
     "http-server": "^0.11.1",
     "jasmine-core": "^2.6.4",
     "karma": "^1.7.0",
@@ -17,12 +19,13 @@
     "protractor": "~5.1.2",
     "shelljs": "^0.7.8",
     "socket.io": "^2.0.3",
-    "tmp": "0.0.31"
+    "tmp": "0.0.31",
+    "uuid": "^3.3.2"
   },
   "scripts": {
     "postinstall": "echo '-x-Done-x-'",
-    "prestart": "npm install",
-    "start": "http-server -a 0.0.0.0 -p 8001",
+    "prestart": "",
+    "start": "node app.js",
     "pretest": "",
     "test": "node node_modules/karma/bin/karma start test/karma.conf.js --single-run --browsers Chrome",
     "test-single-run": "node node_modules/karma/bin/karma start test/karma.conf.js --single-run",

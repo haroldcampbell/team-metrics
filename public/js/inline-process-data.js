@@ -11,15 +11,27 @@ app.processData = function () {
     return squadData;
 }
 
+function isValidIntCell(row, name) {
+    const cellValue = parseInt(row[name]);
+    return [cellValue, Number.isInteger(cellValue)];
+}
+
 /** Cycle time is aggregated based on story effort estimates, independently of sprint */
 app.loadEstimateData = function () {
     let estimates = {}
 
     metrics.worksheet.forEach(row => {
-        if (!_u.$isTruthy(estimates[row.Estimate])) {
-            estimates[row.Estimate] = []
+        const [estimate, isValidEstimate] = isValidIntCell(row, "Estimate");
+        const [cycleTime, isValidCycleTime] = isValidIntCell(row, "Cycle time (days)");
+
+        if (!isValidEstimate || !isValidCycleTime) {
+            return;
         }
-        estimates[parseInt(row.Estimate)].push(parseInt(row["Cycle time (days)"]))
+
+        if (!_u.$isTruthy(estimates[estimate])) {
+            estimates[estimate] = []
+        }
+        estimates[estimate].push(cycleTime);
     });
 
     return estimates
@@ -30,15 +42,21 @@ app.loadSprintData = function() {
     let sprintNames = [];
 
     metrics.worksheet.forEach(row => {
-        if (!_u.$isTruthy(sprints[row.Sprint])) {
-            sprints[row.Sprint] = {
-                name: row.Sprint,
+        const [sprint, isValidSprint] = isValidIntCell(row, "Sprint");
+
+        if (!isValidSprint){
+            return;
+        }
+
+        if (!_u.$isTruthy(sprints[sprint])) {
+            sprints[sprint] = {
+                name: sprint,
                 items: [],
                 estimates: [],
                 cycleTimes: [],
             };
 
-            sprintNames.push(row.Sprint);
+            sprintNames.push(sprint);
         }
 
         let sprintItem = {
@@ -46,9 +64,9 @@ app.loadSprintData = function() {
             cycleTime: parseInt(row["Cycle time (days)"]),
         };
 
-        sprints[row.Sprint].items.push(sprintItem);
-        sprints[row.Sprint].estimates.push(sprintItem.estimate);
-        sprints[row.Sprint].cycleTimes.push(sprintItem.cycleTime);
+        sprints[sprint].items.push(sprintItem);
+        sprints[sprint].estimates.push(sprintItem.estimate);
+        sprints[sprint].cycleTimes.push(sprintItem.cycleTime);
     });
 
     return {
