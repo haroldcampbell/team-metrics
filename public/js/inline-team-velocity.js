@@ -1,4 +1,11 @@
-app.renderTeamVelocity = function (sprintData) {
+import * as _a from '../../anemic-components/lib/ancui.js'
+import * as _u from '../../anemic-components/lib/utils.js'
+import {TitleY} from './inline-common.js'
+import {getApp} from './inline-app.js'
+
+export let _app = getApp()
+
+_app.renderTeamVelocity = function (sprintData) {
     // Grab the parent container
     let chartContainer = _a.$id("sprint-metrics");
     let labelData = _a.$data(sprintData.sprintNames, "height");
@@ -8,7 +15,7 @@ app.renderTeamVelocity = function (sprintData) {
     this.renderVelocityVisual(chartContainer, labelData, velocityData, throughputData);
 }
 
-app.renderVelocityVisual = function (chartContainer, labelData, velocityData, throughputData) {
+_app.renderVelocityVisual = function (chartContainer, labelData, velocityData, throughputData) {
     let chartId = "velocity-container";
     let viewId = "velocity-view";
 
@@ -35,3 +42,4 @@ app.renderVelocityVisual = function (chartContainer, labelData, velocityData, th
         _.label(`Team Metric: Velocity & Throughput`, [_a.$appendCSS("title"), _a.$textSize(12, 20, TitleY)]);
     }, _a.$id(chartId));
 }
+

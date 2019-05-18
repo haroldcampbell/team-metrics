@@ -1,18 +1,18 @@
-const _a = metrics.ancui;
-const _u = metrics.utils;
+import * as _a from '../../anemic-components/lib/ancui.js'
+import * as _u from '../../anemic-components/lib/utils.js'
 
-let app = {
+let __app = {
     sprintData:null
 };
 
-app.boot = function () {
-    let sprintData;
-
-    sprintData = this.processData();
-
-    console.log("[app.boot]", sprintData);
+__app.boot = function () {
+    let sprintData = this.processData();
 
     this.renderTeamVelocity(sprintData);
     this.renderTeamSummary(sprintData);
     this.renderEstimatesForStories(sprintData);
+}
+
+export function getApp() {
+    return __app;
 }

@@ -1,4 +1,30 @@
-app.processData = function () {
+import * as _a from '../../anemic-components/lib/ancui.js'
+import * as _u from '../../anemic-components/lib/utils.js'
+import {getApp} from './inline-app.js'
+
+function isValidIntCell(row, name) {
+    const cellValue = parseInt(row[name]);
+    return [cellValue, Number.isInteger(cellValue)];
+}
+
+function calcDeliveredStoryPoints(estimates) {
+    return estimates.reduce((acc, cur) => acc + cur);
+}
+
+function calcThroughput(estimates) {
+    return estimates.length;
+}
+
+function calAverageCycleTime(cycleTimes) {
+    let sum = cycleTimes.reduce((acc, cur) => acc + cur);
+    let avg = sum / cycleTimes.length;
+
+    return avg.toFixed(1)
+}
+
+export let _app = getApp()
+
+_app.processData = function () {
     let squadData = this.loadSprintData();
     let aggregatedMetrics = this.processSquadAggregatedMetrics(squadData);
 
@@ -11,13 +37,8 @@ app.processData = function () {
     return squadData;
 }
 
-function isValidIntCell(row, name) {
-    const cellValue = parseInt(row[name]);
-    return [cellValue, Number.isInteger(cellValue)];
-}
-
 /** Cycle time is aggregated based on story effort estimates, independently of sprint */
-app.loadEstimateData = function () {
+_app.loadEstimateData = function () {
     let estimates = {}
 
     metrics.worksheet.forEach(row => {
@@ -37,7 +58,7 @@ app.loadEstimateData = function () {
     return estimates
 }
 
-app.loadSprintData = function() {
+_app.loadSprintData = function() {
     let sprints = {};
     let sprintNames = [];
 
@@ -75,7 +96,7 @@ app.loadSprintData = function() {
     };
 }
 
-app.processSquadAggregatedMetrics = function (squadData) {
+_app.processSquadAggregatedMetrics = function (squadData) {
     let averageCycleTimes = [];
     let actualVelocity = [];
     let actualThroughput = [];
@@ -105,22 +126,6 @@ app.processSquadAggregatedMetrics = function (squadData) {
         actualThroughput: actualThroughput,
     }
 }
-
-function calcDeliveredStoryPoints(estimates) {
-    return estimates.reduce((acc, cur) => acc + cur);
-}
-
-function calcThroughput(estimates) {
-    return estimates.length;
-}
-
-function calAverageCycleTime(cycleTimes) {
-    let sum = cycleTimes.reduce((acc, cur) => acc + cur);
-    let avg = sum / cycleTimes.length;
-
-    return avg.toFixed(1)
-}
-
 
 // /** Cycle time is aggregated based on each Sprint */
 // app.loadSprintCycleTimeData = function () {

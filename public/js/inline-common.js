@@ -1,8 +1,11 @@
-const TitleY = 20;
-const TitleMargin = 30;
-const Legend = 20
+import * as _a from '../../anemic-components/lib/ancui.js'
+import * as _u from '../../anemic-components/lib/utils.js'
+
+export const TitleY = 20;
+export const TitleMargin = 30;
+export const Legend = 20
 // const
-function averageCycleTime(cycleTimes, occurrences) {
+export function averageCycleTime(cycleTimes, occurrences) {
     let items = 0;
 
     let totalTime = cycleTimes.reduce((acc, cur) => {
@@ -34,7 +37,7 @@ function averageCycleTime(cycleTimes, occurrences) {
  *  // 2 appeared x15 times
  *  // etc.
  */
-function groupValues(values) {
+export function groupValues(values) {
     let computed = {
         groupedValues: {}
     }
@@ -55,7 +58,7 @@ function groupValues(values) {
     return computed;
 }
 
-function mapToDistributedArray(groupedValues, startFrom = 0) {
+export function mapToDistributedArray(groupedValues, startFrom = 0) {
     function findMinMaxMapKeys(groupedValues) {
         let maxItem = Number.NEGATIVE_INFINITY;
         let minItem = Number.POSITIVE_INFINITY;
@@ -86,10 +89,36 @@ function mapToDistributedArray(groupedValues, startFrom = 0) {
     return computed
 }
 
-function resizeHorizontalAxis(visual) {
+export function resizeHorizontalAxis(visual) {
     const container = visual.getCurrentContainer()
     const boundingBox = _a.containerBoundingBox(visual);
     const axis = _a.$class(container, "axis");
 
     axis[0].$attr("x2", boundingBox.width + boundingBox.x);
+}
+
+export function extractSprintMetrics(selectedSprintData) {
+    let estimateCycleTimes = {};
+
+    selectedSprintData.items.forEach(item => {
+        if (!_u.$isTruthy(estimateCycleTimes[item.estimate])) {
+            estimateCycleTimes[item.estimate] = {
+                count: 0,
+                totalCycleTime: 0,
+                averageCycleTime: 0,
+            };
+        }
+        estimateCycleTimes[item.estimate].count += 1;
+        estimateCycleTimes[item.estimate].totalCycleTime += item.cycleTime;
+    })
+
+    let estimates = Object.keys(estimateCycleTimes);
+    let averageCycleTime = estimates.map(estimate => {
+        return estimateCycleTimes[estimate].averageCycleTime = (estimateCycleTimes[estimate].totalCycleTime / estimateCycleTimes[estimate].count).toFixed(1);
+    });
+
+    return {
+        estimates: estimates,
+        averageCycleTime: averageCycleTime,
+    }
 }

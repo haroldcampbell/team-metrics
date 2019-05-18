@@ -1,6 +1,23 @@
-app.renderEstimatesForStories = function (sprintData) {
+import * as _a from '../../anemic-components/lib/ancui.js'
+import * as _u from '../../anemic-components/lib/utils.js'
+import {
+    TitleY,
+    Legend,
+    TitleMargin,
+    groupValues,
+    mapToDistributedArray,
+    averageCycleTime,
+    resizeHorizontalAxis
+} from './inline-common.js'
+import {
+    getApp
+} from './inline-app.js'
+
+export let _app = getApp()
+
+_app.renderEstimatesForStories = function (sprintData) {
     const estimates = sprintData.estimates
-    for (estimate in estimates) {
+    for (let estimate in estimates) {
         const groupedData = groupValues(estimates[estimate]);
         const distributedData = mapToDistributedArray(groupedData.groupedValues, 1);
         const actualCycleTime = averageCycleTime(groupedData.keys, groupedData.groupedValues).toFixed(1)
@@ -21,7 +38,7 @@ app.renderEstimatesForStories = function (sprintData) {
     }
 }
 
-app.renderEstimateBarChartVisual = function (chartData) {
+_app.renderEstimateBarChartVisual = function (chartData) {
     // Prep the data related to each estimate
     let barsData = _a.$data(chartData.distributedData, "height");
     let labelData = _a.$data(chartData.distributedData, "height");
@@ -68,34 +85,6 @@ app.renderEstimateBarChartVisual = function (chartData) {
             resizeHorizontalAxis(_);
         });
     }, _a.$id(chartId));
-
-
-    // _a.container(viewId+"-data", _ => {
-    //     // Average cycle time
-    //     _.bars(cycleTimeData, [_a.$x(25), _a.$width(20), _a.$xIncrement(40), _a.$maxHeight(80), _a.$alignBottom(200), _a.$appendCSS("bar-cycle-time")]);
-    //     // Number of stories with a specific cycle time
-    //     _.bars(barsData, [_a.$x(25), _a.$width(30), _a.$xIncrement(40), _a.$maxHeight(50), _a.$alignBottom(200)]);
-
-    //     _.labels(barsData, [_a.$x(20), _a.$rawDataValue(), _a.$width(30), _a.$xOffset(10), _a.$maxHeight(50), _a.$alignBottom(200), _a.$textSize(12, 0, -3)]);
-    //     _.labels(labelData, [_a.$x(20), _a.$dataIndex(1), _a.$width(30), _a.$xOffset(10), _a.$alignBottom(200), _a.$textSize(12, 0, 15), ]);
-
-    //     _.onRenderCompleted(() => {
-    //         const container = _.getCurrentContainer()
-    //         const boundingBox = _a.containerBoundingBox(_);
-
-    //         container.$attr("width", boundingBox.width + Math.abs(boundingBox.x) + 25);
-    //         container.$attr("height", boundingBox.height + Math.abs(boundingBox.x));
-    //     });
-    // }, _a.$id(chartId));
-
-    // _a.container(viewId+"-legend", _ => {
-    //     _.label(chartData.chartTitle, [_a.$appendCSS("title"), _a.$textSize(12, 20, 20)]);
-    //     _.label(`${chartData.itemCount} Items`, [_a.$textSize(12, 20, 40)]);
-    //     _.label(`${chartData.numberOfDifferentEstimates} Different Cycle Time(s)`, [_a.$textSize(12, 20, 55)]);
-    //     _.label(`Avg. Cycle Time: ${chartData.cycleTime} (actual ${chartData.actualCycleTime})`, [_a.$textSize(12, 20, 70)]);
-
-    //     _.label("cycle time", [_a.$alignBottom(225), _a.$textSize(12, 20, 15)]);
-    // }, _a.$id(chartId));
 }
 
 // app.renderSequenceChartVisual = function (_a, estimates, groupedData) {

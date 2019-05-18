@@ -1,4 +1,22 @@
-app.renderSprintEstimateCount = function (sprintName, groupedEstimatesData) {
+import * as _a from '../../anemic-components/lib/ancui.js'
+import * as _u from '../../anemic-components/lib/utils.js'
+import {
+    TitleY,
+    Legend,
+    TitleMargin,
+    groupValues,
+    averageCycleTime,
+    resizeHorizontalAxis,
+    mapToDistributedArray,
+} from './inline-common.js'
+
+import {
+    getApp
+} from './inline-app.js'
+
+export let _app = getApp()
+
+_app.renderSprintEstimateCount = function (sprintName, groupedEstimatesData) {
     let viewId = "sprint-summary[estimates]-view";
     let chartId = "sprint-summary[estimates]-container"
     let chartContainer = _a.$id("sprint-summary");
@@ -22,7 +40,7 @@ app.renderSprintEstimateCount = function (sprintName, groupedEstimatesData) {
 
         _.label(`Sprint Summary: Estimates`, [_a.$appendCSS("title"), _a.$textSize(12, 20, TitleY)]);
         _.label(`Sprint ${sprintName}`, [_a.$appendCSS("legend"), _a.$textSize(12, 20, Legend + TitleMargin)]);
-        _.label(`Complexity vs No. Stories`, [_a.$appendCSS("legend"), _a.$textSize(12, 20, Legend*2 + TitleMargin)]);
+        _.label(`Complexity vs No. Stories`, [_a.$appendCSS("legend"), _a.$textSize(12, 20, Legend * 2 + TitleMargin)]);
         _.label("No. Stories (by Complexity)", [_a.$appendCSS("legend"), _a.$alignBottom(225), _a.$textSize(12, 20, 15)]);
 
         _.onRenderCompleted(() => {
@@ -31,7 +49,7 @@ app.renderSprintEstimateCount = function (sprintName, groupedEstimatesData) {
     }, _a.$id(chartId));
 }
 
-app.renderSprintEstimateCycleTimes = function (sprintName, sprintMetrics) {
+_app.renderSprintEstimateCycleTimes = function (sprintName, sprintMetrics) {
     let viewId = "sprint-summary[cycleTimes]-view";
     let chartId = "sprint-summary[cycleTimes]-container"
     let chartContainer = _a.$id("sprint-cycletime-summary");
@@ -54,9 +72,9 @@ app.renderSprintEstimateCycleTimes = function (sprintName, sprintMetrics) {
         _.labels(labelData, [_a.$x(20), _a.$rawDataValue(), _a.$alignBottom(200), _a.$textSize(12, -5, 15), _a.$width(30), _a.$xOffset(10)]);
 
         _.label(`Sprint Summary: Average Cycle Time`, [_a.$appendCSS("title"), _a.$textSize(12, 20, TitleY)]);
-        _.label(`Sprint ${sprintName}`, [_a.$appendCSS("legend"),_a.$textSize(12, 20, Legend + TitleMargin)]);
-        _.label(`Complexity vs Average Cycle Time`, [_a.$appendCSS("legend"),_a.$textSize(12, 20, Legend*2 + TitleMargin)]);
-        _.label("Avg. Cycle Time (by Complexity)", [_a.$appendCSS("legend"),_a.$alignBottom(225), _a.$textSize(12, 20, 15)]);
+        _.label(`Sprint ${sprintName}`, [_a.$appendCSS("legend"), _a.$textSize(12, 20, Legend + TitleMargin)]);
+        _.label(`Complexity vs Average Cycle Time`, [_a.$appendCSS("legend"), _a.$textSize(12, 20, Legend * 2 + TitleMargin)]);
+        _.label("Avg. Cycle Time (by Complexity)", [_a.$appendCSS("legend"), _a.$alignBottom(225), _a.$textSize(12, 20, 15)]);
 
         _.onRenderCompleted(() => {
             const container = _.getCurrentContainer()
@@ -68,7 +86,7 @@ app.renderSprintEstimateCycleTimes = function (sprintName, sprintMetrics) {
     }, _a.$id(chartId));
 }
 
-app.renderSprintEstimateDetails = function (sprint) {
+_app.renderSprintEstimateDetails = function (sprint) {
     let estimates = {}
 
     sprint.items.forEach(item => {
@@ -99,30 +117,4 @@ app.renderSprintEstimateDetails = function (sprint) {
 
         this.renderEstimateBarChartVisual(chartData);
     })
-}
-
-function extractSprintMetrics(selectedSprintData) {
-    let estimateCycleTimes = {};
-
-    selectedSprintData.items.forEach(item => {
-        if (!_u.$isTruthy(estimateCycleTimes[item.estimate])) {
-            estimateCycleTimes[item.estimate] = {
-                count: 0,
-                totalCycleTime: 0,
-                averageCycleTime: 0,
-            };
-        }
-        estimateCycleTimes[item.estimate].count += 1;
-        estimateCycleTimes[item.estimate].totalCycleTime += item.cycleTime;
-    })
-
-    let estimates = Object.keys(estimateCycleTimes);
-    let averageCycleTime = estimates.map(estimate => {
-        return estimateCycleTimes[estimate].averageCycleTime = (estimateCycleTimes[estimate].totalCycleTime / estimateCycleTimes[estimate].count).toFixed(1);
-    });
-
-    return {
-        estimates: estimates,
-        averageCycleTime: averageCycleTime,
-    }
 }

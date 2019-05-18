@@ -1,11 +1,18 @@
-app.renderTeamSummary = function (sprintData) {
+import * as _a from '../../anemic-components/lib/ancui.js'
+import * as _u from '../../anemic-components/lib/utils.js'
+import {TitleY, Legend, TitleMargin, groupValues, extractSprintMetrics} from './inline-common.js'
+import {getApp} from './inline-app.js'
+
+export let _app = getApp()
+
+_app.renderTeamSummary = function (sprintData) {
     let barsData = _a.$data(sprintData.averageCycleTimes, "height");
     let labelData = _a.$data(sprintData.sprintNames, "height");
 
     this.renderTeamSummaryLineChartVisual(sprintData, barsData, labelData);
 }
 
-app.renderTeamSummaryLineChartVisual = function (sprintData, barsData, labelData) {
+_app.renderTeamSummaryLineChartVisual = function (sprintData, barsData, labelData) {
     // Grab the parent container
     let chartContainer = _a.$id("team-summary-metrics");
     let chartId = "team-summary-container"
@@ -37,7 +44,7 @@ app.renderTeamSummaryLineChartVisual = function (sprintData, barsData, labelData
     this.renderSelectedSprintData(sprintData, sprintData.sprintNames.length - 1);
 }
 
-app.wireEvents = function (sprintData, barsElements) {
+_app.wireEvents = function (sprintData, barsElements) {
     for (let index = 0; index < barsElements.length; index++) {
         const item = barsElements[index];
         item.onclick = (e) => {
@@ -46,7 +53,7 @@ app.wireEvents = function (sprintData, barsElements) {
     }
 }
 
-app.renderSelectedSprintData = function (sprintData, index) {
+_app.renderSelectedSprintData = function (sprintData, index) {
     _a.removeChildNodes("sprint-summary");
     _a.removeChildNodes("sprint-cycletime-summary")
     _a.removeChildNodes("sprint-estimate-details")
