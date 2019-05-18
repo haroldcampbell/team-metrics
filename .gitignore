@@ -3,4 +3,4 @@ test-data
 
 anemic-components
 node_modules
-app/dist
+public/dist
