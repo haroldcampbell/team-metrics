@@ -1,9 +1,21 @@
 import * as _a from '../../anemic-components/lib/ancui.js'
 import * as _u from '../../anemic-components/lib/utils.js'
-import {TitleY, Legend, TitleMargin, groupValues, extractSprintMetrics} from './inline-common.js'
-import {getApp} from './inline-app.js'
+import {
+    TitleY,
+    Legend,
+    TitleMargin,
+    groupValues,
+    extractSprintMetrics
+} from './inline-common.js'
 
-export let _app = getApp()
+import {
+    getApp
+} from './inline-app.js'
+
+import {getGrid} from './grid.js'
+
+const _grid = getGrid();
+export let _app = getApp();
 
 _app.renderTeamSummary = function (sprintData) {
     let barsData = _a.$data(sprintData.averageCycleTimes, "height");
@@ -48,6 +60,11 @@ _app.wireEvents = function (sprintData, barsElements) {
     for (let index = 0; index < barsElements.length; index++) {
         const item = barsElements[index];
         item.onclick = (e) => {
+
+            let sprintName = sprintData.sprintNames[index];
+            let sprint = sprintData.sprints[sprintName];
+
+            _grid.showRows(sprint.items.map(item => item.rowIndex));
             this.renderSelectedSprintData(sprintData, index);
         }
     }

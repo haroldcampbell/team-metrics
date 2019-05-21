@@ -7,7 +7,7 @@ let __app = {
 };
 
 __app.boot = function (worksheet) {
-    let _grid = grid.getGrid()
+    let _grid = grid.getGrid();
 
     _grid.initializeGrid(worksheet);
 

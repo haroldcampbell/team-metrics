@@ -62,7 +62,7 @@ _app.loadSprintData = function(worksheet) {
     let sprints = {};
     let sprintNames = [];
 
-    worksheet.forEach(row => {
+    worksheet.forEach((row, rowIndex) => {
         const [sprint, isValidSprint] = isValidIntCell(row, "Sprint");
 
         if (!isValidSprint){
@@ -81,6 +81,7 @@ _app.loadSprintData = function(worksheet) {
         }
 
         let sprintItem = {
+            rowIndex: rowIndex,
             estimate: parseInt(row["Estimate"]),
             cycleTime: parseInt(row["Cycle time (days)"]),
         };

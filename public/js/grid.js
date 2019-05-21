@@ -1,6 +1,9 @@
 import * as _a from '../../anemic-components/lib/ancui.js'
-// import * as _u from '../../anemic-components/lib/utils.js'
-import {getComputedStyle} from "./inline-common.js"
+
+import {
+    getComputedStyle,
+    makeShortHash
+} from "./inline-common.js"
 
 let __grid = {
     headerNodes: null,
@@ -50,11 +53,10 @@ __grid.createHeaderRow = function (containerNode, worksheet) {
 }
 
 __grid.createDataRows = function (containerNode, worksheet) {
-    let [first, ...otherRows] = worksheet;
     let rowNodes = [];
     let columns = worksheet.columns;
 
-    otherRows.forEach(row => {
+    worksheet.forEach(row => {
         let children = {};
         let rowNode = _a.$htmlNode("div", containerNode)
             .$class("data-grid-row");
@@ -69,6 +71,7 @@ __grid.createDataRows = function (containerNode, worksheet) {
         });
 
         rowNodes.push({
+            rowId: makeShortHash(),
             node: rowNode,
             children: children,
         });
@@ -95,4 +98,14 @@ __grid.alignCells = function (containerNode, worksheet) {
 
     this.headerNodes.node.style.width = this.headerNodes.rowWidth + "px";
     containerNode.style.width = this.headerNodes.rowWidth + "px";
+}
+
+__grid.showRows = function (rowIndexes) {
+    this.rowNodes.forEach(rowNode => {
+        rowNode.node.style.display = "none";
+    });
+
+    rowIndexes.forEach(rowIndex => {
+        this.rowNodes[rowIndex].node.style.display = "";
+    });
 }

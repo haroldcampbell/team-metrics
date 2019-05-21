@@ -4,7 +4,7 @@ import * as _u from '../../anemic-components/lib/utils.js'
 export const TitleY = 20;
 export const TitleMargin = 30;
 export const Legend = 20
-// const
+
 export function averageCycleTime(cycleTimes, occurrences) {
     let items = 0;
 
@@ -15,7 +15,6 @@ export function averageCycleTime(cycleTimes, occurrences) {
 
     return totalTime / items
 }
-
 
 /**
  * Takes an array of values and returns an array of the number occurrence of values.
@@ -134,3 +133,25 @@ export function getComputedStyle(elementId) {
         height: parseFloat(style.getPropertyValue("height")),
     }
 }
+
+function makeRandom(characters, length) {
+    var result = '';
+    var charactersLength = characters.length;
+
+    for (var i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+}
+
+export function makeRandomLetter(length) {
+    return makeRandom('abcdefghijklmnopqrstuvwxyz', length);
+}
+
+export function makeRandomDigit(length) {
+    return makeRandom('0123456789', length);
+ }
+
+ export function makeShortHash() {
+     return makeRandomDigit(2) + makeRandomLetter(2) + makeRandomDigit(3) + makeRandomLetter(1)
+ }
