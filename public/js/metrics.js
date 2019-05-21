@@ -6,7 +6,6 @@ import * as app from "./inline-app.js"
 // import "./inline-common.js"
 // import "./inline-process-data.js"
 
-export let worksheet = [];
 export {
     d3,
     ancui,
@@ -14,18 +13,14 @@ export {
 }
 
 const urlParams = new URLSearchParams(window.location.search);
-// const teamId = urlParams.get('team');
 const pathnameParts = window.location.pathname.split("/")
-
 const teamId = pathnameParts[pathnameParts.length - 1]
 
 console.log("teamId", teamId)
-d3.csv(`/f/${teamId}`).then(function (data) {
-    worksheet = data;
-
+d3.csv(`/f/${teamId}`).then(function (worksheet) {
     let _app = app.getApp();
 
-console.log("[app]", _app, this)
+    console.log("[app]", _app)
 
-    _app.boot()
+    _app.boot(worksheet);
 });

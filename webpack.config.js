@@ -6,6 +6,7 @@ module.exports = {
     examples: [
       './anemic-components/lib/ancui.js',
       './public/js/inline-common.js',
+      './public/js/grid.js',
       './public/js/inline-app.js',
       './public/js/inline-process-data.js',
       './public/js/inline-team-velocity.js',

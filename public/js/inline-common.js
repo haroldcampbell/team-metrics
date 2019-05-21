@@ -122,3 +122,15 @@ export function extractSprintMetrics(selectedSprintData) {
         averageCycleTime: averageCycleTime,
     }
 }
+
+export function getComputedStyle(elementId) {
+    let style = null;
+    let el = (typeof elementId === 'string') ? document.getElementById(elementId) : elementId;
+
+    style = window.getComputedStyle(el, null)
+
+    return {
+        width: parseFloat(style.getPropertyValue("width")),
+        height: parseFloat(style.getPropertyValue("height")),
+    }
+}

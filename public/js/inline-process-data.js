@@ -24,24 +24,24 @@ function calAverageCycleTime(cycleTimes) {
 
 export let _app = getApp()
 
-_app.processData = function () {
-    let squadData = this.loadSprintData();
+_app.processData = function (worksheet) {
+    let squadData = this.loadSprintData(worksheet);
     let aggregatedMetrics = this.processSquadAggregatedMetrics(squadData);
 
     squadData.sprintMetrics = aggregatedMetrics.sprintMetrics;
     squadData.averageCycleTimes = aggregatedMetrics.averageCycleTimes;
     squadData.actualVelocity = aggregatedMetrics.actualVelocity;
     squadData.actualThroughput = aggregatedMetrics.actualThroughput;
-    squadData.estimates = this.loadEstimateData();
+    squadData.estimates = this.loadEstimateData(worksheet);
 
     return squadData;
 }
 
 /** Cycle time is aggregated based on story effort estimates, independently of sprint */
-_app.loadEstimateData = function () {
+_app.loadEstimateData = function (worksheet) {
     let estimates = {}
 
-    metrics.worksheet.forEach(row => {
+    worksheet.forEach(row => {
         const [estimate, isValidEstimate] = isValidIntCell(row, "Estimate");
         const [cycleTime, isValidCycleTime] = isValidIntCell(row, "Cycle time (days)");
 
@@ -58,11 +58,11 @@ _app.loadEstimateData = function () {
     return estimates
 }
 
-_app.loadSprintData = function() {
+_app.loadSprintData = function(worksheet) {
     let sprints = {};
     let sprintNames = [];
 
-    metrics.worksheet.forEach(row => {
+    worksheet.forEach(row => {
         const [sprint, isValidSprint] = isValidIntCell(row, "Sprint");
 
         if (!isValidSprint){

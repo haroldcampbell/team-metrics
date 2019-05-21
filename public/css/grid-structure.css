@@ -1,0 +1,36 @@
+#data-grid {
+    position: fixed;
+    width: 260px;
+    height: 80%;
+    /* margin-left: -20px; */
+    background-color: red;
+    overflow-x: scroll;
+    overflow-y: scroll;
+    border: solid 1px #444;
+    z-index: 0;
+}
+
+.data-grid-container {
+    align-items: stretch;
+}
+
+.data-grid-row,
+.data-grid-header-row {
+    display: flex;
+}
+
+.data-grid-header-cell {
+    padding: 10px;
+    background: #333;
+    color: #999;
+    border: solid 1px #444;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+.data-grid-row-cell {
+    background: #333;
+    color: #999;
+    border: solid 1px #444;
+    padding: 10px;
+}
