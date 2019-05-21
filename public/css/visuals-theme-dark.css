@@ -37,8 +37,7 @@ svg .arc {
 }
 
 .line {
-  stroke-width: 2px;
-  stroke-linecap: round;
+  stroke: #666;
 }
 
 .text {
