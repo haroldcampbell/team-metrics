@@ -1,0 +1,72 @@
+.rootContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.data-summary {
+  width: 400px;
+  align-items: stretch;
+  padding: 10px;
+}
+
+.quant {
+  padding: 20px;
+  border-left-style: solid;
+  border-left-width: 1px;
+  z-index: 1;
+}
+
+.quant label {
+  display: inline-block;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  font-size: 1.5em;
+}
+
+svg {
+  min-height: 250px;
+  min-width: 200px;
+}
+
+.widget-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  min-height: 250px;
+  width: auto;
+  border-radius: 5px;
+}
+
+.widget {
+  overflow-x: scroll;
+  width: 300px;
+  margin: 10px;
+  border-radius: 5px;
+}
+
+.estimate-details {
+  margin: 40px 0 40px 0;
+  border-radius: 5px;
+}
+
+#border {
+  stroke-width: 1;
+}
+
+.line {
+  stroke-width: 2px;
+  stroke-linecap: round;
+}
+
+.title {
+  font-size: 16px;
+}
+
+.axis {
+  stroke-width: 2px;
+  stroke-linecap: round;
+}
+
+.bar-cycle-time {
+  cursor: pointer;
+}

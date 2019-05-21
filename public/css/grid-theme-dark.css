@@ -1,0 +1,29 @@
+#data-grid {
+    border: solid 1px #444;
+}
+
+.data-grid-header-cell {
+    color: #999;
+    background: #333;
+    border-left: solid 1px #444;
+}
+
+.data-grid-row-cell {
+    color: #999;
+    background: #202020;
+    border-left: solid 1px #333;
+}
+
+.data-grid-header-cell {
+    border-bottom: solid 1px #444;
+}
+
+.data-grid-row {
+    border-bottom: solid 1px #333;
+}
+
+.data-grid-row:hover .data-grid-row-cell {
+    background: #303030;
+    border-left: solid 1px #333;
+
+}
