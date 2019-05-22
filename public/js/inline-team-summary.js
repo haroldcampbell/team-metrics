@@ -41,11 +41,11 @@ _app.renderTeamSummaryLineChartVisual = function (sprintData, barsData, labelDat
         _.bars(barsData, [_a.$x(20), _a.$maxHeight(50), _a.$alignBottom(200), _a.$width(30), _a.$xIncrement(40), _a.$appendCSS("bar-cycle-time")]);
         _.hLine([_a.$y(200), _a.$x(5), _a.$width(200), _a.$appendCSS("axis")]);
 
-        _.labels(barsData, [_a.$x(20), _a.$rawDataValue(), _a.$maxHeight(50), _a.$alignBottom(200), _a.$textSize(12, -5, -3), _a.$width(30), _a.$xOffset(10)]);
-        _.labels(labelData, [_a.$x(20), _a.$rawDataValue(), _a.$alignBottom(200), _a.$textSize(12, -5, 15), _a.$width(30), _a.$xOffset(10)]);
+        _.labels(barsData, [_a.$x(20), _a.$rawDataValue(), _a.$maxHeight(50), _a.$alignBottom(200), _a.$xMargin(-5), _a.$yMargin(-3), _a.$width(30), _a.$xOffset(10)]);
+        _.labels(labelData, [_a.$x(20), _a.$rawDataValue(), _a.$alignBottom(200), _a.$xMargin(-5), _a.$yMargin(15), _a.$width(30), _a.$xOffset(10)]);
 
-        _.label(`Team Metric: Avg. Cycle Time/Story`, [_a.$appendCSS("title"), _a.$textSize(12, 20, TitleY)]);
-        _.label("Sprints", [_a.$appendCSS("legend"), _a.$alignBottom(225), _a.$textSize(12, 20, Legend + TitleMargin)]);
+        _.label(`Team Metric: Avg. Cycle Time/Story`, [_a.$appendCSS("title"), _a.$xMargin(20), _a.$yMargin(TitleY)]);
+        _.label("Sprints", [_a.$appendCSS("legend"), _a.$alignBottom(225), _a.$xMargin(20), _a.$yMargin(Legend + TitleMargin)]);
 
         _.onRenderCompleted(() => {
             const barsElements = _a.$id(viewId).getElementsByTagName("rect");

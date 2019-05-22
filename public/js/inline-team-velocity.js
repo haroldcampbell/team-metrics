@@ -29,17 +29,17 @@ _app.renderVelocityVisual = function (chartContainer, labelData, velocityData, t
         // Velocity
         _.ellipses(velocityData, [_a.$cx(20), _a.$maxY(50), _a.$diameter(10), _a.$cxIncrement(40), _a.$alignCYBottom(110)]);
         _.lines(velocityData, [_a.$x(20), _a.$xIncrement(40), _a.$width(40), _a.$maxHeight(50), _a.$alignBottom(110)]);
-        _.labels(velocityData, [_a.$x(20), _a.$rawDataValue(), _a.$maxHeight(50), _a.$alignBottom(110), _a.$textSize(12, -5, -10), _a.$width(5), _a.$xIncrement(40)]);
-        _.label("Velocity", [_a.$appendCSS("legend"), _a.$alignBottom(120), _a.$textSize(12, 20, 0)]);
+        _.labels(velocityData, [_a.$x(20), _a.$rawDataValue(), _a.$maxHeight(50), _a.$alignBottom(110), _a.$xMargin(-5), _a.$yMargin(-10), _a.$width(5), _a.$xIncrement(40)]);
+        _.label("Velocity", [_a.$appendCSS("legend"), _a.$alignBottom(120), _a.$xMargin(20), _a.$yMargin(0)]);
 
         // Throughput
         _.bars(throughputData, [_a.$x(20), _a.$maxHeight(50), _a.$alignBottom(200), _a.$width(30), _a.$xIncrement(40)]);
         _.hLine([_a.$y(200), _a.$x(5), _a.$width(200), _a.$appendCSS("axis")]);
-        _.labels(throughputData, [_a.$x(20), _a.$rawDataValue(), _a.$maxHeight(50), _a.$alignBottom(200), _a.$textSize(12, -5, -5), _a.$width(5), _a.$xIncrement(40)]);
-        _.label("Throughput", [_a.$appendCSS("legend"), _a.$alignBottom(225), _a.$textSize(12, 20, 15)]);
+        _.labels(throughputData, [_a.$x(20), _a.$rawDataValue(), _a.$maxHeight(50), _a.$alignBottom(200), _a.$xMargin(-5), _a.$yMargin(-5), _a.$width(5), _a.$xIncrement(40)]);
+        _.label("Throughput", [_a.$appendCSS("legend"), _a.$alignBottom(225), _a.$xMargin(20), _a.$yMargin(15)]);
 
-        _.labels(labelData, [_a.$x(20), _a.$rawDataValue(), _a.$alignBottom(200), _a.$textSize(12, -5, 15), _a.$width(5), _a.$xIncrement(40)]);
-        _.label(`Team Metric: Velocity & Throughput`, [_a.$appendCSS("title"), _a.$textSize(12, 20, TitleY)]);
+        _.labels(labelData, [_a.$x(20), _a.$rawDataValue(), _a.$alignBottom(200), _a.$xMargin(-5), _a.$yMargin(15), _a.$width(5), _a.$xIncrement(40)]);
+        _.label(`Team Metric: Velocity & Throughput`, [_a.$appendCSS("title"), _a.$xMargin(20), _a.$xMargin(TitleY)]);
     }, _a.$id(chartId));
 }
 

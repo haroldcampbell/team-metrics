@@ -65,6 +65,14 @@ svg .arc {
   fill: rgb(255, 110, 110);
 }
 
+.quant .section-name {
+  color: #999;
+}
+
+/* .quant:hover .section-name {
+  color: #333;
+} */
+
 .quant:hover .estimate-details {
   background-color: transparent;
   -webkit-transition: background-color 0.7s;

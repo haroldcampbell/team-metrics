@@ -35,13 +35,13 @@ _app.renderSprintEstimateCount = function (sprintName, groupedEstimatesData) {
         _.bars(barsData, [_a.$x(20), _a.$maxHeight(50), _a.$alignBottom(200), _a.$width(30), _a.$xIncrement(40)]);
         _.hLine([_a.$y(200), _a.$x(5), _a.$width(200), _a.$appendCSS("axis")]);
 
-        _.labels(barsData, [_a.$x(20), _a.$rawDataValue(), _a.$maxHeight(50), _a.$alignBottom(200), _a.$textSize(12, -5, -3), _a.$width(30), _a.$xOffset(10)]);
-        _.labels(labelData, [_a.$x(20), _a.$rawDataValue(), _a.$alignBottom(200), _a.$textSize(12, -5, 15), _a.$width(30), _a.$xOffset(10)]);
+        _.labels(barsData, [_a.$x(20), _a.$rawDataValue(), _a.$maxHeight(50), _a.$alignBottom(200), _a.$xMargin(-5), _a.$yMargin(-3), _a.$width(30), _a.$xOffset(10)]);
+        _.labels(labelData, [_a.$x(20), _a.$rawDataValue(), _a.$alignBottom(200), _a.$xMargin(-5), _a.$yMargin(15), _a.$width(30), _a.$xOffset(10)]);
 
-        _.label(`Sprint Summary: Estimates`, [_a.$appendCSS("title"), _a.$textSize(12, 20, TitleY)]);
-        _.label(`Sprint ${sprintName}`, [_a.$appendCSS("legend"), _a.$textSize(12, 20, Legend + TitleMargin)]);
-        _.label(`Complexity vs No. Stories`, [_a.$appendCSS("legend"), _a.$textSize(12, 20, Legend * 2 + TitleMargin)]);
-        _.label("No. Stories (by Complexity)", [_a.$appendCSS("legend"), _a.$alignBottom(225), _a.$textSize(12, 20, 15)]);
+        _.label(`Sprint Summary: Estimates`, [_a.$appendCSS("title"), _a.$xMargin(20), _a.$yMargin(TitleY)]);
+        _.label(`Sprint ${sprintName}`, [_a.$appendCSS("legend"), _a.$xMargin(20), _a.$yMargin(Legend + TitleMargin)]);
+        _.label(`Complexity vs No. Stories`, [_a.$appendCSS("legend"), _a.$xMargin(20), _a.$yMargin(Legend * 2 + TitleMargin)]);
+        _.label("No. Stories (by Complexity)", [_a.$appendCSS("legend"), _a.$alignBottom(225), _a.$xMargin(20), _a.$yMargin(15)]);
 
         _.onRenderCompleted(() => {
             resizeHorizontalAxis(_);
@@ -68,13 +68,13 @@ _app.renderSprintEstimateCycleTimes = function (sprintName, sprintMetrics) {
         _.bars(barsData, [_a.$x(20), _a.$maxHeight(50), _a.$alignBottom(200), _a.$width(30), _a.$xIncrement(40)]);
         _.hLine([_a.$y(200), _a.$x(5), _a.$width(200), _a.$appendCSS("axis")]);
 
-        _.labels(barsData, [_a.$x(20), _a.$rawDataValue(), _a.$maxHeight(50), _a.$alignBottom(200), _a.$textSize(12, -5, -3), _a.$width(30), _a.$xOffset(10)]);
-        _.labels(labelData, [_a.$x(20), _a.$rawDataValue(), _a.$alignBottom(200), _a.$textSize(12, -5, 15), _a.$width(30), _a.$xOffset(10)]);
+        _.labels(barsData, [_a.$x(20), _a.$rawDataValue(), _a.$maxHeight(50), _a.$alignBottom(200), _a.$xMargin(-5), _a.$yMargin(-3), _a.$width(30), _a.$xOffset(10)]);
+        _.labels(labelData, [_a.$x(20), _a.$rawDataValue(), _a.$alignBottom(200), _a.$xMargin(-5), _a.$yMargin(15), _a.$width(30), _a.$xOffset(10)]);
 
-        _.label(`Sprint Summary: Average Cycle Time`, [_a.$appendCSS("title"), _a.$textSize(12, 20, TitleY)]);
-        _.label(`Sprint ${sprintName}`, [_a.$appendCSS("legend"), _a.$textSize(12, 20, Legend + TitleMargin)]);
-        _.label(`Complexity vs Average Cycle Time`, [_a.$appendCSS("legend"), _a.$textSize(12, 20, Legend * 2 + TitleMargin)]);
-        _.label("Avg. Cycle Time (by Complexity)", [_a.$appendCSS("legend"), _a.$alignBottom(225), _a.$textSize(12, 20, 15)]);
+        _.label(`Sprint Summary: Average Cycle Time`, [_a.$appendCSS("title"), _a.$xMargin(20), _a.$yMargin(TitleY)]);
+        _.label(`Sprint ${sprintName}`, [_a.$appendCSS("legend"), _a.$xMargin(20), _a.$yMargin(Legend + TitleMargin)]);
+        _.label(`Complexity vs Average Cycle Time`, [_a.$appendCSS("legend"), _a.$xMargin(20), _a.$yMargin(Legend*2 + TitleMargin)]);
+        _.label("Avg. Cycle Time (by Complexity)", [_a.$appendCSS("legend"), _a.$alignBottom(225),  _a.$xMargin(20), _a.$yMargin(15)]);
 
         _.onRenderCompleted(() => {
             const container = _.getCurrentContainer()

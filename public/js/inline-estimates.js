@@ -66,15 +66,15 @@ _app.renderEstimateBarChartVisual = function (chartData) {
         _.bars(barsData, [_a.$x(25), _a.$width(30), _a.$xIncrement(40), _a.$maxHeight(50), _a.$alignBottom(200)]);
         _.hLine([_a.$y(200), _a.$x(5), _a.$width(200), _a.$appendCSS("axis")]);
 
-        _.labels(barsData, [_a.$x(20), _a.$rawDataValue(), _a.$width(30), _a.$xOffset(10), _a.$maxHeight(50), _a.$alignBottom(200), _a.$textSize(12, 0, -3)]);
-        _.labels(labelData, [_a.$x(20), _a.$dataIndex(1), _a.$width(30), _a.$xOffset(10), _a.$alignBottom(200), _a.$textSize(12, 0, 15), ]);
+        _.labels(barsData, [_a.$x(20), _a.$rawDataValue(), _a.$width(30), _a.$xOffset(10), _a.$maxHeight(50), _a.$alignBottom(200), _a.$yMargin(-3)]);
+        _.labels(labelData, [_a.$x(20), _a.$dataIndex(1), _a.$width(30), _a.$xOffset(10), _a.$alignBottom(200), _a.$yMargin(15), ]);
 
-        _.label(chartData.chartTitle, [_a.$appendCSS("title"), _a.$textSize(12, 20, TitleY)]);
-        _.label(`${chartData.itemCount} Items`, [_a.$appendCSS("legend"), _a.$textSize(12, 20, Legend + TitleMargin)]);
-        _.label(`${chartData.numberOfDifferentEstimates} Different Cycle Time(s)`, [_a.$appendCSS("legend"), _a.$textSize(12, 20, Legend * 2 + TitleMargin)]);
-        _.label(`Avg. Cycle Time: ${chartData.cycleTime} (actual ${chartData.actualCycleTime})`, [_a.$appendCSS("legend"), _a.$textSize(12, 20, Legend * 3 + TitleMargin)]);
+        _.label(chartData.chartTitle, [_a.$appendCSS("title"), _a.$xMargin(20), _a.$yMargin(TitleY)]);
+        _.label(`${chartData.itemCount} Items`, [_a.$appendCSS("legend"), _a.$xMargin(20), _a.$yMargin(Legend + TitleMargin)]);
+        _.label(`${chartData.numberOfDifferentEstimates} Different Cycle Time(s)`, [_a.$appendCSS("legend"), _a.$xMargin(20), _a.$yMargin(Legend * 2 + TitleMargin)]);
+        _.label(`Avg. Cycle Time: ${chartData.cycleTime} (actual ${chartData.actualCycleTime})`, [_a.$appendCSS("legend"), _a.$xMargin(20), _a.$yMargin(Legend * 3 + TitleMargin)]);
 
-        _.label("cycle time", [_a.$appendCSS("legend"), _a.$alignBottom(225), _a.$textSize(12, 20, 15)]);
+        _.label("cycle time", [_a.$appendCSS("legend"), _a.$alignBottom(225), _a.$xMargin(20), _a.$yMargin(15)]);
         _.onRenderCompleted(() => {
             const container = _.getCurrentContainer()
             const boundingBox = _a.containerBoundingBox(_);
